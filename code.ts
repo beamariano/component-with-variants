@@ -249,6 +249,12 @@ const iconSvgs: Record<string, Record<string, string>> = {
     dark_default: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32.53"><defs><style>.cls-1{fill:#026691;}.cls-2{fill:#7bbbbf;}</style></defs><title>Asset 11</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect class="cls-1" width="43.66" height="32.53"/><polygon class="cls-1" points="60 32.53 42.71 21.98 42.71 10.55 60 0 60 32.53"/><path class="cls-2" d="M32,14.22H11.89v4.09H32Z"/><path class="cls-2" d="M24,26.3V6.22H19.89V26.3Z"/></g></g></svg>`,
     dark_hover: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 32.53"><defs><style>.cls-1{fill:#7cbabf;}.cls-2{fill:#026691;}</style></defs><title>Asset 24</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect class="cls-1" width="43.66" height="32.53"/><polygon class="cls-1" points="60 32.53 42.71 21.98 42.71 10.55 60 0 60 32.53"/><path class="cls-2" d="M32,14.22H11.89v4.09H32Z"/><path class="cls-2" d="M24,26.3V6.22H19.89V26.3Z"/></g></g></svg>`,
   },
+  Home: {
+    light_default: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 56" fill="none"><path fill="#1A3F61" d="M27.5 8l18 16h-6v18h-10v-12h-4v12h-10v-18h-6z"/></svg>`,
+    light_hover: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 56" fill="none"><path fill="#7BBBBF" d="M27.5 8l18 16h-6v18h-10v-12h-4v12h-10v-18h-6z"/></svg>`,
+    dark_default: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 56" fill="none"><path fill="#026691" d="M27.5 8l18 16h-6v18h-10v-12h-4v12h-10v-18h-6z"/></svg>`,
+    dark_hover: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 56" fill="none"><path fill="#7BBBBF" d="M27.5 8l18 16h-6v18h-10v-12h-4v12h-10v-18h-6z"/></svg>`,
+  },
 };
 
 // --- Helper to get the right SVG for a variant ---
@@ -350,9 +356,8 @@ async function createAllComponentSets() {
       frame.layoutMode = "HORIZONTAL";
       frame.primaryAxisAlignItems = "MIN";
       frame.counterAxisAlignItems = "CENTER";
-      frame.itemSpacing = 6;
-      frame.paddingLeft = 12;
-      frame.paddingRight = 12;
+      frame.itemSpacing = 16; // margin-right for icon
+      frame.paddingRight = 24; // 1.5rem
 
       // Active state: 4px orange left border
       if (variant.isActive && variant.accentColor) {
@@ -362,6 +367,9 @@ async function createAllComponentSets() {
         frame.strokeBottomWeight = 0;
         frame.strokeLeftWeight = 4;
         frame.strokesIncludedInLayout = true;
+        frame.paddingLeft = 24; // 1.5rem (24px), border adds the 4px visually
+      } else {
+        frame.paddingLeft = 28; // 1.5rem (24px) + 4px margin-left for icon
       }
 
       // Lock size to 240x40
